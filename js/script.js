@@ -1,10 +1,11 @@
 // CREATE AN ARRAY OF EMPLOYEES
-let arrEmployees = [ [63829543, "Harsh Nahar", 4563, "harshpnahar28@gmail.com", "Administrative"],
+let arrEmployees = [
+	[63829543, "Harsh Nahar", 4563, "harshpnahar28@gmail.com", "Administrative"],
     [18181818, "Virat Kohli", 9877, "vk18@gmail.com", "Engineering"],
     [77777777, "James Bond", 7777, "jamesbond007@gmail.com", "Marketing"],
     [65873453, "Bill Gates", 1010, "billgates@microsoft.com", "Quality Assurance"],
     [78543678, "Elon Musk", 8970, "elonmusk@tesla.com", "Executive"]
-]
+];
 
 // CHECK TO SEE IF STORAGE OBJECT EXISTS WHEN THE PAGE LOADS
 // IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
