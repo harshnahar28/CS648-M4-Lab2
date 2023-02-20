@@ -1,52 +1,41 @@
-
-
-
-
-
-var arrEmployees = [
-    [63829543, "Harsh Nahar", 4563, "harshpnahar28@gmail.com", "Administrative"],
+// CREATE AN ARRAY OF EMPLOYEES
+let arrEmployees = [ [63829543, "Harsh Nahar", 4563, "harshpnahar28@gmail.com", "Administrative"],
     [18181818, "Virat Kohli", 9877, "vk18@gmail.com", "Engineering"],
     [77777777, "James Bond", 7777, "jamesbond007@gmail.com", "Marketing"],
     [65873453, "Bill Gates", 1010, "billgates@microsoft.com", "Quality Assurance"],
     [78543678, "Elon Musk", 8970, "elonmusk@tesla.com", "Executive"]
 ]
 
-
-var $ = function(x){
-    "use strict";
-    return window.document.getElementById(x);
-}
-
-
-
-
+// CHECK TO SEE IF STORAGE OBJECT EXISTS WHEN THE PAGE LOADS
+// IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
 if (localStorage.getItem('employees') !== null) {
     arrEmployees = JSON.parse(localStorage.getItem('employees'))
 }
 
-var form        = $('addForm')
-var empTable    = $('empTable')
-var empCount    = $('empCount')
+// GET DOM ELEMENTS
+let form        = document.getElementById('addForm')
+let empTable    = document.getElementById('empTable')
+let empCount    = document.getElementById('empCount')
 
 // BUILD THE EMPLOYEES TABLE WHEN THE PAGE LOADS
-createTable()
+buildGrid()
 
 // ADD EMPLOYEE
-form.addEventListener('submit', (x) => {
+form.addEventListener('submit', (e) => {
     // PREVENT FORM SUBMISSION
-    x.preventDefault()
+    e.preventDefault()
     // GET THE VALUES FROM THE TEXT BOXES
-    var empID       = parseInt($('id').value)
-    var name     = $('name').value
-    var extention    = parseInt($('extension').value)
-    var email    = $('email').value
-    var department   = $('department').value
+    let empID       = parseInt(document.getElementById('id').value)
+    let empName     = document.getElementById('name').value
+    let empExt      = parseInt(document.getElementById('extension').value)
+    let empEmail    = document.getElementById('email').value
+    let empDept     = document.getElementById('department').value
     // ADD THE NEW EMPLOYEE TO A NEW ARRAY OBJECT
-    var arrNewEmployee = [empID, name, extention, email, department]
+    let arrNewEmployee = [empID, empName, empExt, empEmail, empDept]
     // PUSH THE NEW ARRAY TO THE *EXISTING* EMPLOYEES ARRAY
     arrEmployees.push(arrNewEmployee)
     // BUILD THE GRID
-    createTable()
+    buildGrid()
     // RESET THE FORM
     form.reset()
     // SET FOCUS BACK TO THE ID TEXT BOX
@@ -54,29 +43,29 @@ form.addEventListener('submit', (x) => {
 })
 
 // DELETE EMPLOYEElo
-empTable.addEventListener('click', (x) => {
-    if (x.target.classList.contains('delete')) {
+empTable.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete')) {
         // CONFIRM THE DELETE
         if (confirm('Are you sure you want to delete this employee?')) {
             // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
-            var rowIndex = x.target.parentNode.parentNode.rowIndex
+            let rowIndex = e.target.parentNode.parentNode.rowIndex
             // REMOVE EMPLOYEE FROM ARRAY
             arrEmployees.splice(rowIndex - 1, 1)
             // BUILD THE GRID
-            createTable()
+            buildGrid()
         }
     }
 })
 
 // BUILD THE EMPLOYEES GRID
-function createTable() {
+function buildGrid() {
     // REMOVE THE EXISTING SET OF ROWS BY REMOVING THE ENTIRE TBODY SECTION
     empTable.lastElementChild.remove()
     // REBUILD THE TBODY FROM SCRATCH
-    var tbody = document.createElement('tbody')
+    let tbody = document.createElement('tbody')
     // LOOP THROUGH THE ARRAY OF EMPLOYEES
     // REBUILDING THE ROW STRUCTURE
-    for (var employee of arrEmployees) {
+    for (let employee of arrEmployees) {
         tbody.innerHTML += 
         `
         <tr>
